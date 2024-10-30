@@ -1,0 +1,130 @@
+#body {
+    background-color: rgb(68, 68, 68);
+}
+
+.mainContainer {
+    display: flex;
+    margin-top: 5vh;
+    justify-content: center;
+    align-items: center;
+}
+
+#statusField {
+    background-color: slateblue;
+    min-width: 30vh;
+    height: 10vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 5vh 0 5vh;
+}
+
+.scoreContainer {
+    width: 70vh;
+    margin: auto;
+    display: flex;
+}
+
+.contenedorTurnoB {
+    width: 25vh;
+    height: 7vh;
+    margin: 0vh auto;
+    background-color: white;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.contenedorTurnoN {
+    width: 25vh;
+    height: 7vh;
+    margin: 0vh auto;
+    background-color: black;
+    color: white;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.contenedorMultiplicador {
+    background-color: lightgreen;
+    padding: 1vh;
+    margin: auto;
+}
+
+#tablero {
+    width: min-content;
+    height: min-content;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
+    grid-template-rows: 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
+    justify-content: stretch;
+    align-items: stretch;
+    grid-column-gap: 0;
+    grid-row-gap: 0;
+
+    margin: 20px 20vh 20px;
+}
+
+.registerTableContainer {
+    background-color: transparent;
+}
+
+.registerTable {
+    border-collapse: collapse;
+    background-color: gray;
+    width: 50vh;
+}
+
+
+.registerTable th, .registerTable td {
+    border: 1px solid #ddd;
+    padding: 1vh;
+    width: 20vh;
+    height: 4vh;
+    text-align: center;
+}
+
+.casilla1 {
+    width: 8vh;
+    height: 8vh;
+    border: 2px solid black;
+    background-color: gray;
+
+    display: flex;
+    justify-content: center;
+}
+
+.casilla2 {
+    width: 8vh;
+    height: 8vh;
+    border: 2px solid black;
+    background-color: rgb(83, 83, 83);
+
+    display: flex;
+    justify-content: center;
+}
+
+.inactivo {
+    opacity: 0.4;
+}
+
+.casillaIluminada {
+    background-color: rgba(255, 255, 255, 0.1);
+    background-color: slateblue;
+    mix-blend-mode: color-dodge;
+}
+
+.casillaComible {
+    background-color: greenyellow;
+}
+
+.casillaAnterior {
+    background-color: rgb(65, 88, 0);
+}
+
+.casillaGanador {
+    background-color: rgba(0, 217, 255, 0.7);
+}

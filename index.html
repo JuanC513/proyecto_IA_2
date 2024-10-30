@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Chess</title>
+        <link href="styles.css" rel="stylesheet">
+        <script type="module" src="script.js" defer></script>
+    </head>
+    <body id="body">
+        <div class="mainContainer">
+            <div id="statusField">
+                Inicio del juego
+            </div>
+            <div>
+                <div class="scoreContainer">
+                    <div id="turnoB" class="contenedorTurnoB">
+                        Turno de la CPU
+                    </div>
+                    <div id="cpuTieneMultiplicador" class="contenedorMultiplicador">
+                        X2
+                    </div>
+                    <div id="puntajeB" class="contenedorTurnoB">
+                        Puntaje: 0
+                    </div>
+                </div>
+                <div id="tablero">
+                </div>
+                <div class="scoreContainer">
+                    <div id="turnoN" class="contenedorTurnoN">
+                        Turno del jugador
+                    </div>
+                    <div id="jugadorTieneMultiplicador" class="contenedorMultiplicador">
+                        X2
+                    </div>
+                    <div id="puntajeN" class="contenedorTurnoN">
+                        Puntaje: 0
+                    </div>
+                </div>
+            </div>
+            <div class="registerTableContainer">
+                <table border="1" class="registerTable">
+                    <thead>
+                        <tr>
+                            <th colspan="2">Registro</th>
+                        </tr>
+                        <tr>
+                            <th>Movimiento</th>
+                            <th>Consiguió</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td id="movimientoCell"></td>
+                            <td id="consiguioCell"></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </body>
+</html>
