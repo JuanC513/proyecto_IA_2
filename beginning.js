@@ -29,7 +29,7 @@ export function getRandomInt(min, max) {
 // Parámetros del juego
 export const cantidadX2 = 4;
 export const cantidadNumeros = 10;
-export const dificultad = 2;
+export const dificultad = 6;
 
 // Condiciones del juego
 export const IAversus = false;
