@@ -51,16 +51,31 @@ gameModeButtons.forEach(button => {
 
 // Lógica para el botón "Iniciar Juego"
 document.getElementById('startGameBtn').addEventListener('click', () => {
-    if (dificultad_1 > 1 && dificultad_2 > 1 && modoDeJuego && lenguaje) {
-        // Mostrar la pantalla del juego y ocultar la de configuración
-        document.getElementById('configScreen').classList.remove('active');
-        document.getElementById('gameScreen').classList.add('active');
-        // Inicia el juego
-        iniciarJuego();
+    if (!modoDeJuego) {
+        alert("Por favor, seleccione el Modo de Juego.");
+    } else if (modoDeJuego !== "multiplayer") {
+        if (dificultad_1 <= 1 || !lenguaje) {
+            alert("Por favor, seleccione la Dificultad de la IA #1 y el lenguaje.");
+        } else if (modoDeJuego === "iaVs" && dificultad_2 <= 2) {
+            alert("Por favor, seleccione la Dificultad de la IA #2.");
+        } else {
+            cambiarPantalla();
+        }
     } else {
-        alert("Por favor, seleccione el Lenguaje, las Dificultades y el Modo de juego.");
+        cambiarPantalla();
     }
 });
+
+
+// Función para ocultar la pantalla de configuración y mostrar la del Juego
+const cambiarPantalla = () => {
+    // Mostrar la pantalla del juego y ocultar la de configuración
+    document.getElementById('configScreen').classList.remove('active');
+    document.getElementById('gameScreen').classList.add('active');
+
+    // Inicia el juego
+    iniciarJuego();
+}
 
 
 // Botón para reiniciar el juego, sólo cuando una partida haya terminado
@@ -164,41 +179,45 @@ const iniciarJuego = () => {
             textoModoJuego = "Modo: Jugador vs IA.1";
             break;
     }
-    // Añadimos la dificultad_1 elegida
-    textoModoJuego += "<br>"
-    switch (dificultad_1) {
-        case 2:
-            textoModoJuego += "Principiante";
-            break;
-        case 4:
-            textoModoJuego += "Amateur";
-            break;
-        case 6:
-            textoModoJuego += "Experto";
-            break;
-    }
-    // Añadimos la dificultad_2 elegida
-    textoModoJuego += " vs "
-    switch (dificultad_2) {
-        case 2:
-            textoModoJuego += "Principiante";
-            break;
-        case 4:
-            textoModoJuego += "Amateur";
-            break;
-        case 6:
-            textoModoJuego += "Experto";
-            break;
-    }
-    // Añadimos el lenguaje elegido
-    textoModoJuego += "<br><br>"
-    switch (lenguaje) {
-        case "JS":
-            textoModoJuego += "Usando JavaScript";
-            break;
-        case "GO":
-            textoModoJuego += "Usando GO";
-            break;
+    if (modoDeJuego !== "multiplayer") {
+        // Añadimos la dificultad_1 elegida
+        textoModoJuego += "<br>"
+        switch (dificultad_1) {
+            case 2:
+                textoModoJuego += "Principiante";
+                break;
+            case 4:
+                textoModoJuego += "Amateur";
+                break;
+            case 6:
+                textoModoJuego += "Experto";
+                break;
+        }
+        if (modoDeJuego === "iaVs") {
+            // Añadimos la dificultad_2 elegida
+            textoModoJuego += " vs "
+            switch (dificultad_2) {
+                case 2:
+                    textoModoJuego += "Principiante";
+                    break;
+                case 4:
+                    textoModoJuego += "Amateur";
+                    break;
+                case 6:
+                    textoModoJuego += "Experto";
+                    break;
+            }
+        }
+        // Añadimos el lenguaje elegido
+        textoModoJuego += "<br><br>"
+        switch (lenguaje) {
+            case "JS":
+                textoModoJuego += "Usando JavaScript";
+                break;
+            case "GO":
+                textoModoJuego += "Usando Golang";
+                break;
+        }
     }
     modeField.innerHTML = textoModoJuego;
 
