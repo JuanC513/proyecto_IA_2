@@ -56,7 +56,7 @@ document.getElementById('startGameBtn').addEventListener('click', () => {
     } else if (modoDeJuego !== "multiplayer") {
         if (dificultad_1 <= 1 || !lenguaje) {
             alert("Por favor, seleccione la Dificultad de la IA #1 y el lenguaje.");
-        } else if (modoDeJuego === "iaVs" && dificultad_2 <= 2) {
+        } else if (modoDeJuego === "iaVs" && dificultad_2 <= 1) {
             alert("Por favor, seleccione la Dificultad de la IA #2.");
         } else {
             cambiarPantalla();
