@@ -1,6 +1,7 @@
 // Variables inicializadas para almacenar las selecciones
 let modoDeJuego = null; // Puede ser multiplayer, vsCPU, iaVs
-let dificultad = 1; // Puede ser 2, 4, 6
+let dificultad_1 = 1; // Puede ser 2, 4, 6 para la IA #1, caballo blanco
+let dificultad_2 = 1; // Puede ser 2, 4, 6 para la IA #2, caballo negro
 let lenguaje = "";
 
 
@@ -17,13 +18,23 @@ languageButtons.forEach(button => {
     });
 });
 
-// Captura de los botones de dificultad
-const difficultyButtons = document.querySelectorAll('.difficulty-btn');
-difficultyButtons.forEach(button => {
+// Captura de los botones de dificultad_1
+const difficultyButtons_1 = document.querySelectorAll('.difficulty_1-btn');
+difficultyButtons_1.forEach(button => {
     button.addEventListener('click', () => {
-        difficultyButtons.forEach(b => b.classList.remove('selected')); // Desmarcar otros botones
+        difficultyButtons_1.forEach(b => b.classList.remove('selected')); // Desmarcar otros botones
         button.classList.add('selected');
-        dificultad = parseInt(button.getAttribute('data-difficulty')); // Guardar selección
+        dificultad_1 = parseInt(button.getAttribute('data-difficulty')); // Guardar selección
+    });
+});
+
+// Captura de los botones de dificultad_2
+const difficultyButtons_2 = document.querySelectorAll('.difficulty_2-btn');
+difficultyButtons_2.forEach(button => {
+    button.addEventListener('click', () => {
+        difficultyButtons_2.forEach(b => b.classList.remove('selected')); // Desmarcar otros botones
+        button.classList.add('selected');
+        dificultad_2 = parseInt(button.getAttribute('data-difficulty')); // Guardar selección
     });
 });
 
@@ -40,14 +51,14 @@ gameModeButtons.forEach(button => {
 
 // Lógica para el botón "Iniciar Juego"
 document.getElementById('startGameBtn').addEventListener('click', () => {
-    if (dificultad > 1 && modoDeJuego) {
+    if (dificultad_1 > 1 && dificultad_2 > 1 && modoDeJuego && lenguaje) {
         // Mostrar la pantalla del juego y ocultar la de configuración
         document.getElementById('configScreen').classList.remove('active');
         document.getElementById('gameScreen').classList.add('active');
         // Inicia el juego
         iniciarJuego();
     } else {
-        alert("Por favor, seleccione la Dificultad y el Modo de juego.");
+        alert("Por favor, seleccione el Lenguaje, las Dificultades y el Modo de juego.");
     }
 });
 
@@ -153,9 +164,9 @@ const iniciarJuego = () => {
             textoModoJuego = "Modo: Jugador vs IA.1";
             break;
     }
-    // Añadimos la dificultad elegida
+    // Añadimos la dificultad_1 elegida
     textoModoJuego += "<br>"
-    switch (dificultad) {
+    switch (dificultad_1) {
         case 2:
             textoModoJuego += "Principiante";
             break;
@@ -164,6 +175,29 @@ const iniciarJuego = () => {
             break;
         case 6:
             textoModoJuego += "Experto";
+            break;
+    }
+    // Añadimos la dificultad_2 elegida
+    textoModoJuego += " vs "
+    switch (dificultad_2) {
+        case 2:
+            textoModoJuego += "Principiante";
+            break;
+        case 4:
+            textoModoJuego += "Amateur";
+            break;
+        case 6:
+            textoModoJuego += "Experto";
+            break;
+    }
+    // Añadimos el lenguaje elegido
+    textoModoJuego += "<br><br>"
+    switch (lenguaje) {
+        case "JS":
+            textoModoJuego += "Usando JavaScript";
+            break;
+        case "GO":
+            textoModoJuego += "Usando GO";
             break;
     }
     modeField.innerHTML = textoModoJuego;
@@ -448,11 +482,12 @@ const iniciarJuego = () => {
     // Obtenemos la jugada de la IA (con el lenguaje seleccionado) y la ejecutamos
     const ejecutarJugadaIA = async (primeraIA) => {
         let movimientoIA = null;
+        const dificultadIA = primeraIA ? dificultad_1 : dificultad_2;
         
         if (lenguaje == "JS") {
-            movimientoIA = await jugadaIA(estadoJuego, dificultad, primeraIA);
+            movimientoIA = await jugadaIA(estadoJuego, dificultadIA, primeraIA);
         } else {
-            movimientoIA = await jugadaIAconGolang(estadoJuego, dificultad, primeraIA);
+            movimientoIA = await jugadaIAconGolang(estadoJuego, dificultadIA, primeraIA);
         }
         
         if (primeraIA) {
