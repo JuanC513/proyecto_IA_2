@@ -28,7 +28,7 @@ export const jugadaIA = (estadoJuego, dificultad, primeraIA) => {
   const isMaximizingPlayer = estadoJuego['turnoJugador'];
 
   const bestMove = getBestMove(rootNode, depth, isMaximizingPlayer, primeraIA);
-  console.log("nodos: ", nodosArbolMinimax);
+  console.log("nodosJS: ", nodosArbolMinimax);
 
   return bestMove;
 }
@@ -37,16 +37,10 @@ export const jugadaIA = (estadoJuego, dificultad, primeraIA) => {
 export const jugadaIAconGolang = async (estadoJuego, dificultad, primeraIA) => {
   const initialState = JSON.parse(JSON.stringify(estadoJuego)); // el estado inicial del juego
   initialState['cantidadJugadas'] = 0;
-  nodosArbolMinimax = 0;
 
-  const rootNode = new GameNode(initialState);
   const depth = dificultad; // Profundidad máxima de búsqueda
   const isMaximizingPlayer = estadoJuego['turnoJugador'];
 
-  //const bestMove = getBestMove(rootNode, depth, isMaximizingPlayer, primeraIA);
-  console.log("nodosJS: ", nodosArbolMinimax);
-
-  //const resultado = await enviarDatos(initialState, depth, isMaximizingPlayer, primeraIA);
   // Llamamos a enviarDatos y usamos .then() para manejar la promesa
   return enviarDatos(estadoJuego, depth, isMaximizingPlayer, primeraIA)
     .then(respuesta => {

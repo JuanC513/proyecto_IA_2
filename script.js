@@ -448,7 +448,6 @@ const iniciarJuego = () => {
     // Obtenemos la jugada de la IA (con el lenguaje seleccionado) y la ejecutamos
     const ejecutarJugadaIA = async (primeraIA) => {
         let movimientoIA = null;
-        console.log(lenguaje);
         
         if (lenguaje == "JS") {
             movimientoIA = await jugadaIA(estadoJuego, dificultad, primeraIA);
