@@ -3,59 +3,94 @@
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Chess</title>
+        <title>KnightGame</title>
         <link href="styles.css" rel="stylesheet">
         <script type="module" src="script.js" defer></script>
     </head>
     <body id="body">
-        <div class="mainContainer">
-            <div id="statusField">
-                Inicio del juego
+        <div class="configScreen active" id="configScreen">
+            <h1>KnightGame</h1>
+            <h2>Configuración del Juego</h2>
+
+            <h3>Lenguaje:</h3>
+            <div class="btn-group">
+                <button class="language-btn" data-language="JS">JavaScript</button>
+                <button class="language-btn" data-language="GO">Golang</button>
             </div>
-            <div>
-                <div class="scoreContainer">
-                    <div id="turnoB" class="contenedorTurnoB">
-                        Turno de la CPU
-                    </div>
-                    <div id="cpuTieneMultiplicador" class="contenedorMultiplicador">
-                        X2
-                    </div>
-                    <div id="puntajeB" class="contenedorTurnoB">
-                        Puntaje: 0
-                    </div>
-                </div>
-                <div id="tablero">
-                </div>
-                <div class="scoreContainer">
-                    <div id="turnoN" class="contenedorTurnoN">
-                        Turno del jugador
-                    </div>
-                    <div id="jugadorTieneMultiplicador" class="contenedorMultiplicador">
-                        X2
-                    </div>
-                    <div id="puntajeN" class="contenedorTurnoN">
-                        Puntaje: 0
-                    </div>
-                </div>
+
+            <h3>Dificultad:</h3>
+            <div class="btn-group">
+                <button class="difficulty-btn" data-difficulty="2">Principiante</button>
+                <button class="difficulty-btn" data-difficulty="4">Amateur</button>
+                <button class="difficulty-btn" data-difficulty="6">Experto</button>
             </div>
-            <div class="registerTableContainer">
-                <table border="1" class="registerTable">
-                    <thead>
-                        <tr>
-                            <th colspan="2">Registro</th>
-                        </tr>
-                        <tr>
-                            <th>Movimiento</th>
-                            <th>Consiguió</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td id="movimientoCell"></td>
-                            <td id="consiguioCell"></td>
-                        </tr>
-                    </tbody>
-                </table>
+            
+            <h3>Modo de Juego:</h3>
+            <div class="btn-group">
+                <button class="game-mode-btn" data-mode="multiplayer">Multijugador</button>
+                <button class="game-mode-btn" data-mode="vsCPU">VS CPU</button>
+                <button class="game-mode-btn" data-mode="iaVs">IA Versus</button>
+            </div>
+            
+            <button id="startGameBtn">Iniciar Juego</button>
+        </div>
+
+        <div class="gameScreen" id="gameScreen">
+            <div class="mainContainer">
+                <div class="statusContainer">
+                    <div id="statusField">
+                        Inicio del juego
+                    </div>
+                    <div id="modeField">
+                        Modo de juego
+                    </div>
+                </div>
+                <div>
+                    <div class="scoreContainer">
+                        <div id="turnoB" class="contenedorTurnoB">
+                            Turno de la CPU
+                        </div>
+                        <div id="cpuTieneMultiplicador" class="contenedorMultiplicador">
+                            X2
+                        </div>
+                        <div id="puntajeB" class="contenedorTurnoB">
+                            Puntaje: 0
+                        </div>
+                    </div>
+                    <div id="tablero">
+                    </div>
+                    <div class="scoreContainer">
+                        <div id="turnoN" class="contenedorTurnoN">
+                            Turno del jugador
+                        </div>
+                        <div id="jugadorTieneMultiplicador" class="contenedorMultiplicador">
+                            X2
+                        </div>
+                        <div id="puntajeN" class="contenedorTurnoN">
+                            Puntaje: 0
+                        </div>
+                    </div>
+                </div>
+                <div class="registerTableContainer">
+                    <table border="1" class="registerTable">
+                        <thead>
+                            <tr>
+                                <th colspan="2">Registro</th>
+                            </tr>
+                            <tr>
+                                <th>Movimiento</th>
+                                <th>Consiguió</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td id="movimientoCell"></td>
+                                <td id="consiguioCell"></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <button id="restartButton">Reiniciar juego</button>
+                </div>
             </div>
         </div>
     </body>

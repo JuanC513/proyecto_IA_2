@@ -17,7 +17,7 @@ import { isTerminal_2, getScore_2 } from './utility_2.js'
 let nodosArbolMinimax = 0;
 
 
-// Recibe el estado del juego, la dificultad y qué IA se usará, retorna el mejor movimiento de la IA basado en los resultados del algoritmo minimax
+// Recibe el estado del juego, la dificultad y qué IA se usará, retorna el mejor movimiento de la IA basado en los resultados del algoritmo minimax usando el lenguaje JavaScript
 export const jugadaIA = (estadoJuego, dificultad, primeraIA) => {
   const initialState = JSON.parse(JSON.stringify(estadoJuego)); // el estado inicial del juego
   initialState['cantidadJugadas'] = 0;
@@ -27,13 +27,65 @@ export const jugadaIA = (estadoJuego, dificultad, primeraIA) => {
   const depth = dificultad; // Profundidad máxima de búsqueda
   const isMaximizingPlayer = estadoJuego['turnoJugador'];
 
-  const bestMove = getBestMove(rootNode, depth, isMaximizingPlayer, primeraIA);  
+  const bestMove = getBestMove(rootNode, depth, isMaximizingPlayer, primeraIA);
+  console.log("nodos: ", nodosArbolMinimax);
 
   return bestMove;
 }
 
+// Recibe el estado del juego, la dificultad y qué IA se usará, retorna el mejor movimiento de la IA basado en los resultados del algoritmo minimax usando el lenguaje Golang
+export const jugadaIAconGolang = async (estadoJuego, dificultad, primeraIA) => {
+  const initialState = JSON.parse(JSON.stringify(estadoJuego)); // el estado inicial del juego
+  initialState['cantidadJugadas'] = 0;
+  nodosArbolMinimax = 0;
 
-// recibe el nodo raíz del árbol, la profundidad e IA que se usarán y si se está maximizando al jugador, ejecutará minimax sobre los hijos para ver cuál se escoje y de éste se obtene la jugada que se hará por parte de la IA elegida.
+  const rootNode = new GameNode(initialState);
+  const depth = dificultad; // Profundidad máxima de búsqueda
+  const isMaximizingPlayer = estadoJuego['turnoJugador'];
+
+  //const bestMove = getBestMove(rootNode, depth, isMaximizingPlayer, primeraIA);
+  console.log("nodosJS: ", nodosArbolMinimax);
+
+  //const resultado = await enviarDatos(initialState, depth, isMaximizingPlayer, primeraIA);
+  // Llamamos a enviarDatos y usamos .then() para manejar la promesa
+  return enviarDatos(estadoJuego, depth, isMaximizingPlayer, primeraIA)
+    .then(respuesta => {
+      // Aquí se maneja la respuesta cuando la promesa se resuelve
+      return respuesta; // Retornamos la respuesta
+    })
+    .catch(error => {
+      // Aquí manejamos posibles errores
+      console.error("Error en enviarDatos:", error);
+    });
+}
+
+// Función con la que le pasaremos el JSON a Golang para que ejecute y retorne la mejor jugada de la IA correspondiente
+const enviarDatos = async (estadoJuego, profundidad, isMaximizingPlayer, primeraIA) => {
+  const data = {
+    estadoJuego: estadoJuego,
+    profundidad: profundidad,
+    isMaximizingPlayer: isMaximizingPlayer,
+    primeraIA: primeraIA,
+  };
+
+  const response = await fetch("http://localhost:8082/getBestMove", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json"
+    },
+    body: JSON.stringify(data)
+  });
+
+  if (response.ok) {
+    const respuesta = await response.json();
+    return respuesta;
+  } else {
+    console.error("Error al enviar los datos");
+  }
+};
+
+
+// Función que recibe el nodo raíz del árbol, la profundidad e IA que se usarán y si se está maximizando al jugador, ejecutará minimax sobre los hijos para ver cuál se escoje y de éste se obtene la jugada que se hará por parte de la IA elegida.
 function getBestMove(rootNode, depth, isMaximizingPlayer, primeraIA) {
   let bestMove = null;
   let bestScore = isMaximizingPlayer ? -Infinity : Infinity;

@@ -4,9 +4,10 @@
  * Este archivo provee funciones que toman el estado del juego:
  * movimientosPieza: genera los movimientos válidos que puede realizar un caballo y los retorna las casillas objetivo en un array.
  * moverPieza: ejecuta un movimiento mientras sea válido, retorna el nuevo estado del juego.
+ * Estas funciones a su vez necesitan de unas funciones auxiliares que no se exportan, sólo se definen aquí.
  */
 
-// Revisa los movimientos que puede realizar el caballo seleccionado, los retorna en una Array
+// Revisa los movimientos que puede realizar el caballo seleccionado, los retorna en un Array
 export const movimientosPieza = (casillaSeleccionada, posJugador, posCPU) => {
   let fila = casillaSeleccionada["fila"], col = casillaSeleccionada["col"];
   let movimientosPosibles = [];
@@ -24,7 +25,7 @@ export const movimientosPieza = (casillaSeleccionada, posJugador, posCPU) => {
 }
 
 
-// Valida los movimientos generados y retorna los que se acepten
+// Valida los movimientos generados y retorna los que se acepten en un Array
 const validarMovimientos = (unosMovimientos, posJugador, posCPU) => {
   let movimientosValidos = [];
 
@@ -76,19 +77,19 @@ export const moverPieza = (casillaObjetivo, estadoJuego) => {
     if (seConsumeElContenido) {
       nuevoEstado['tableroMatriz'][fila][col] = 0;
     }
+    const registroCelda = nuevoEstado['registroMovimientos'][fila][col];
+    
     if (nuevoEstado['turnoJugador']) {
       nuevoEstado['posicionCaballoJugador'] = {
         fila: fila,
         col: col
-      }
-      const registroCelda = nuevoEstado['registroMovimientos'][fila][col];
+      };
       registroCelda['caballoJugador'] += 1;
     } else {
       nuevoEstado['posicionCaballoCPU'] = {
         fila: fila,
         col: col
-      }
-      const registroCelda = nuevoEstado['registroMovimientos'][fila][col];
+      };
       registroCelda['caballoCPU'] += 1;
     }
     nuevoEstado['turnoJugador'] = !nuevoEstado['turnoJugador'];
