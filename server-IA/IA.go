@@ -130,7 +130,7 @@ func (gn *GameNode) GetScore(primeraIA bool) int {
 }
 
 
-// Devuelve una lista de nodos hijo (posibles movimientos del desde este estado).
+// Devuelve una lista de nodos hijo (posibles movimientos del caballo desde este estado).
 func (gn *GameNode) GetChildren(turnoJugador bool) []*GameNode {
 	var children []*GameNode
 	caballoActual := gn.State.PosicionCaballoJugador

@@ -64,22 +64,19 @@ func moverPieza(casillaObjetivo Posicion, estadoJuego *EstadoJuego) EstadoJuego 
     nuevoEstado.NumerosRestantes = append([]int(nil), estadoJuego.NumerosRestantes...)
     
 
-    casillaElegida := [2]int{casillaObjetivo.Fila, casillaObjetivo.Col}
+    casillaElegida := [2]int{casillaObjetivo.Fila, casillaObjetivo.Col} // La casilla hacia donde se quiere mover la pieza
 
-    // Comprobar si la casilla está iluminada
+    // Comprobar si la casilla está iluminada, es decir, dentro de los movimientos válidos del caballo
     for _, casilla := range nuevoEstado.CasillasIluminadas {
         if casilla[0] == casillaElegida[0] && casilla[1] == casillaElegida[1] {
-            // Casilla válida, intentar mover
+            // Casilla válida, intentamos mover
             seConsumeElContenido := false
 
             // Verificar si hay contenido en la casilla objetivo
             contenidoAlcanzado := nuevoEstado.TableroMatriz[casillaObjetivo.Fila][casillaObjetivo.Col]
             if contenidoAlcanzado != 0 {
                 // Revisar el contenido de la casilla
-                //revision := revisarContenido(contenidoAlcanzado, estadoJuego)
 				nuevoEstado, seConsumeElContenido = revisarContenido(contenidoAlcanzado, estadoJuego)
-                /* seConsumeElContenido = revision.SeConsumeElContenido
-                nuevoEstado = revision.NuevoEstado */
             }
 
             // Mover el caballo
@@ -117,12 +114,13 @@ func revisarContenido(unContenido int, estadoJuego *EstadoJuego) (NuevoEstado Es
     seConsumeElContenido := false
 
     if unContenido == 13 { // Si el contenido es un multiplicador
-        // Si el jugador actual no ha consumido un multiplicador aún
-        if !nuevoEstado.PlayerMultiplier && !nuevoEstado.CpuMultiplier {
+        // Si el caballo actual no ha consumido un multiplicador aún
+        if !nuevoEstado.PlayerMultiplier && nuevoEstado.TurnoJugador || !nuevoEstado.CpuMultiplier && !nuevoEstado.TurnoJugador {
             seConsumeElContenido = true
             nuevoEstado.CantidadMultiplicadoresRestantes--
         }
 
+        // Activamos el multiplicador para el caballo del turno actual
         if nuevoEstado.TurnoJugador {
             nuevoEstado.PlayerMultiplier = true
         } else {

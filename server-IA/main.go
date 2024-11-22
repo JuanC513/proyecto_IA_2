@@ -18,19 +18,18 @@ type RequestData struct {
 
 // Estructura para el EstadoJuego
 type EstadoJuego struct {
-	TableroMatriz             [][]int `json:"tableroMatriz"`    // Suponiendo que 'InicioTableroMatriz' es una matriz de strings
+	TableroMatriz             [][]int `json:"tableroMatriz"`    // El tablero es una matriz de Enteros
 	PlayerScore               int        `json:"playerScore"`
 	CpuScore                 int        `json:"cpuScore"`
 	PlayerMultiplier         bool       `json:"playerMultiplier"`
 	CpuMultiplier            bool       `json:"cpuMultiplier"`
-	PosicionCaballoJugador   Posicion     `json:"posicionCaballoJugador"`  // Suponiendo que son coordenadas en un array de 2 enteros
+	PosicionCaballoJugador   Posicion     `json:"posicionCaballoJugador"`
 	PosicionCaballoCPU       Posicion     `json:"posicionCaballoCPU"`
-	CasillasIluminadas       [][2]int    `json:"casillasIluminadas"`      // Array de casillas iluminadas (si son coordenadas o números, usa el tipo adecuado)
+	CasillasIluminadas       [][2]int    `json:"casillasIluminadas"`      // Array de casillas iluminadas (cada posición es un Array de 2 Enteros)
 	TurnoJugador             bool       `json:"turnoJugador"`
 	NumerosRestantes         []int      `json:"numerosRestantes"`        // Array de números restantes
 	CantidadMultiplicadoresRestantes int `json:"cantidadMultiplicadoresRestantes"`
 	RegistroMovimientos      [][]Movimiento `json:"registroMovimientos"`     // Array de registros de movimientos
-	CantidadJugadas               int        `json:"cantidadJugadas"`    // Cantidad de jugadas que se realizan desde que entra aquí hasta lo que va expandiendo minimax
 }
 
 // Representa una posición en el tablero (fila, columna)
@@ -76,7 +75,7 @@ func bestMoveHandler(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	// Llamamos a la función del archivo 'procesador.go' para procesar los datos
+	// Llamamos a la función del archivo 'IA.go' para procesar los datos
 	fila, columna := jugadaIA(&requestData.EstadoJuego, requestData.Profundidad, requestData.IsMaximizingPlayer, requestData.PrimeraIA)
 
 	// Preparar la respuesta

@@ -1,5 +1,5 @@
 /**
- * Archivo original de utilidad
+ * Archivo original de utilidad, no se usa en el proyecto
  * 
  * Este archivo debe proveer la función de utilidad y la función que indica si el juego terminó para la IA #x.
  */

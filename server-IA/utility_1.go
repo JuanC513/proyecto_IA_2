@@ -22,9 +22,7 @@ func isTerminal_1(estadoJuego *EstadoJuego) bool {
     restantesJugador, restantesCPU := utilidadRestantes(estadoJuego)
 
     // Verificar las condiciones para que el juego haya terminado
-    if estadoJuego.PlayerScore > estadoJuego.CpuScore+restantesCPU || 
-		estadoJuego.CpuScore > estadoJuego.PlayerScore+restantesJugador || 
-		len(estadoJuego.NumerosRestantes) < 1 {
+    if estadoJuego.PlayerScore > estadoJuego.CpuScore+restantesCPU || estadoJuego.CpuScore > estadoJuego.PlayerScore+restantesJugador || len(estadoJuego.NumerosRestantes) < 1 {
         return true
     }
     
@@ -71,7 +69,7 @@ func getScore_1(estadoJuego *EstadoJuego) int {
 }
 
 
-// Función para obtener el valor absoluto de un entero
+// Función para obtener el valor absoluto de un número entero
 func abs(x int) int {
 	if x < 0 {
 		return -x

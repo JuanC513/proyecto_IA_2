@@ -2,7 +2,7 @@
 let modoDeJuego = null; // Puede ser multiplayer, vsCPU, iaVs
 let dificultad_1 = 1; // Puede ser 2, 4, 6 para la IA #1, caballo blanco
 let dificultad_2 = 1; // Puede ser 2, 4, 6 para la IA #2, caballo negro
-let lenguaje = "";
+let lenguaje = ""; // Puede ser JS, GO
 
 
 // Dejamos que al principio sólo se vea la pantalla de configuración

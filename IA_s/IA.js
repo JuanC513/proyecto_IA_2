@@ -3,7 +3,9 @@
  * 
  * Este archivo provee las funciones necesarias para que una IA haga una jugada:
  * jugadaIA: recibe el estado del juego, la dificultad y qué IA se usarán: primera = true -> se usa la utilidad_1, false -> se usa la utilidad_2
- * getBestMove: recibe el nodo raíz del árbol, la profundidad que se usará y si se está maximizando al jugador, ejecutará minimax sobre los hijos para ver cuál se escoje según el criterio isMaximizingPlayer y de éste se obtene la jugada que se hará por parte de la IA.
+ * getBestMove: recibe el nodo raíz del árbol, la profundidad que se usará y si se está maximizando al jugador,
+ * ejecutará minimax sobre los hijos para ver cuál se escoje según el criterio isMaximizingPlayer
+ * y de éste se obtene la jugada que se hará por parte de la IA.
  * minimax: la función minimax que tiene incluida la poda alpha-beta
  * 
  * Además de la clase de la cual se harán los nodos para realizar el árbol.
@@ -19,11 +21,9 @@ let nodosArbolMinimax = 0;
 
 // Recibe el estado del juego, la dificultad y qué IA se usará, retorna el mejor movimiento de la IA basado en los resultados del algoritmo minimax usando el lenguaje JavaScript
 export const jugadaIA = (estadoJuego, dificultad, primeraIA) => {
-  const initialState = JSON.parse(JSON.stringify(estadoJuego)); // el estado inicial del juego
-  initialState['cantidadJugadas'] = 0;
   nodosArbolMinimax = 0;
 
-  const rootNode = new GameNode(initialState);
+  const rootNode = new GameNode(estadoJuego);
   const depth = dificultad; // Profundidad máxima de búsqueda
   const isMaximizingPlayer = estadoJuego['turnoJugador'];
 
@@ -35,9 +35,6 @@ export const jugadaIA = (estadoJuego, dificultad, primeraIA) => {
 
 // Recibe el estado del juego, la dificultad y qué IA se usará, retorna el mejor movimiento de la IA basado en los resultados del algoritmo minimax usando el lenguaje Golang
 export const jugadaIAconGolang = async (estadoJuego, dificultad, primeraIA) => {
-  const initialState = JSON.parse(JSON.stringify(estadoJuego)); // el estado inicial del juego
-  initialState['cantidadJugadas'] = 0;
-
   const depth = dificultad; // Profundidad máxima de búsqueda
   const isMaximizingPlayer = estadoJuego['turnoJugador'];
 
@@ -164,7 +161,7 @@ class GameNode {
     }
   }
 
-  // Devuelve una lista de nodos hijo (posibles movimientos del desde este estado).
+  // Devuelve una lista de nodos hijo (posibles movimientos del caballo desde este estado).
   getChildren(turnoJugador) {
     let caballoActual = turnoJugador ? this.state['posicionCaballoJugador'] : this.state['posicionCaballoCPU'];
 
@@ -177,9 +174,8 @@ class GameNode {
 
       let newState = JSON.parse(JSON.stringify(this.state));
       newState = moverPieza(casillaObjetivo, newState);
-      newState['cantidadJugadas'] += 1;
       children.push(new GameNode(newState));
     }
-    return children /* lista de nodos hijos */;
+    return children; /* lista de nodos hijos */
   }
 }
