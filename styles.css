@@ -17,17 +17,28 @@ html, body {
 #configScreen.active {
     background-color: rgb(97, 90, 158);
     width: fit-content;
+    height: 85%;
     margin: 0;
     border-radius: 5%;
     padding: 0%;
     display: flex;
     flex-direction: column;  /* Alinea los elementos en columna */
     align-items: center;
+    overflow-y:auto;
+}
+.titles-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.titles-container h1, h2 {
+    margin-top: 7%;
+    margin-bottom: 0;
 }
 .btn-group button {
-    margin: 15px 25px;
-    padding: 10px 20px;
-    font-size: 16px;
+    margin: 1px 20px;
+    padding: 5px 15px;
+    font-size: 1vw;
     cursor: pointer;
     transition: background-color 0.3s, border-color 0.3s;
 }
@@ -37,8 +48,8 @@ html, body {
     border-color: #5c5c5c;        /* Borde más oscuro */
 }
 #startGameBtn {
-    margin: 3vh;
-    font-size: 2vh;
+    margin: 1.5vw;
+    font-size: 1vw;
 }
 
 /* Estilos para la pantalla de juego */
@@ -57,36 +68,39 @@ html, body {
 
 #statusField {
     background-color: slateblue;
-    min-width: 30vh;
-    height: 10vh;
+    min-width: 15vw;
+    height: 5vw;
     display: flex;
     justify-content: center;
     align-items: center;
     margin: 5vh 0 5vh;
+    font-size: 1.2vw;
 }
 
 #modeField {
     background-color: rgb(61, 37, 117);
-    min-width: 30vh;
-    height: 10vh;
+    min-width: 15vw;
+    height: 6vw;
     display: flex;
     text-align: center;
     justify-content: center;
     align-items: center;
     color: white;
     margin: 5vh 0 5vh;
+    font-size: 1vw;
 }
 
 .scoreContainer {
-    width: 70vh;
+    width: 33vw;
     margin: auto;
     display: flex;
+    font-size: 1.3vw;
 }
 
 .contenedorTurnoB {
-    width: 25vh;
-    height: 7vh;
-    margin: 0vh auto;
+    width: 12vw;
+    height: 3vw;
+    margin: 0 auto;
     background-color: white;
 
     display: flex;
@@ -95,9 +109,9 @@ html, body {
 }
 
 .contenedorTurnoN {
-    width: 25vh;
-    height: 7vh;
-    margin: 0vh auto;
+    width: 12vw;
+    height: 3vw;
+    margin: 0 auto;
     background-color: black;
     color: white;
 
@@ -132,6 +146,7 @@ html, body {
     flex-direction: column;  /* Alinea los elementos en columna */
     align-items: center;     /* Centra los elementos horizontalmente */
     gap: 30px;
+    font-size: 1.2vw;
 }
 
 #restartButton {
@@ -147,7 +162,7 @@ html, body {
 
 .registerTable th, .registerTable td {
     border: 1px solid #ddd;
-    padding: 1vh;
+    padding: 1vh 1.5vh;
     width: 20vh;
     height: 4vh;
     text-align: center;
