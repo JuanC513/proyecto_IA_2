@@ -60,12 +60,12 @@ export const getScore_1 = (estadoJuego) => {
  // Sacamos una utilidad sumando las distancias de Manhattan de cada caballo a cada casilla de puntaje que quede en el tablero
 function utilidadDistancias(estadoJuego) {
   const distanciaL = (ubi1, ubi2) => {
-    return Math.abs(ubi1['fila'] - ubi2['fila']) + Math.abs(ubi1['col'] - ubi2['col'])
+    return Math.abs(ubi1['fila'] - ubi2['fila']) + Math.abs(ubi1['col'] - ubi2['col']);
   }
-  let utilidadJugador = 0
-  let utilidadCPU = 0
-  const posJugador = estadoJuego['posicionCaballoJugador']
-  const posCPU = estadoJuego['posicionCaballoCPU']
+  let utilidadJugador = 0;
+  let utilidadCPU = 0;
+  const posJugador = estadoJuego['posicionCaballoJugador'];
+  const posCPU = estadoJuego['posicionCaballoCPU'];
   
   for (let i = 0; i < 8; i++) {
     for (let j = 0; j < 8; j++) {
@@ -74,7 +74,7 @@ function utilidadDistancias(estadoJuego) {
         const ubicacionNumero = {
           fila: i,
           col: j
-        }
+        };
         // Hacemos el cociente del número y la distancia de los caballos a ese número, para darle prioridad a las casillas que tienen un puntaje mayor
         utilidadJugador += unNumero/distanciaL(ubicacionNumero, posJugador);
         utilidadCPU += unNumero/distanciaL(ubicacionNumero, posCPU);
@@ -91,31 +91,31 @@ function utilidadDistancias(estadoJuego) {
 
 // Sacamos una utilidad sumando el puntaje restante que puede obtener cada caballo, esto teniendo en cuenta los números restantes en el tablero, los multiplicadores restantes y el multiplicador que tenga el caballo actualmente
 function utilidadRestantes(estadoJuego) {
-  let cantidadRestanteJ = 0
-  let cantidadRestanteC = 0
+  let cantidadRestanteJ = 0;
+  let cantidadRestanteC = 0;
 
-  let cantidadMultiplicadoresJ =  estadoJuego['cantidadMultiplicadoresRestantes']
-  let cantidadMultiplicadoresM = estadoJuego['cantidadMultiplicadoresRestantes']
+  let cantidadMultiplicadoresJ =  estadoJuego['cantidadMultiplicadoresRestantes'];
+  let cantidadMultiplicadoresM = estadoJuego['cantidadMultiplicadoresRestantes'];
 
   if (estadoJuego['playerMultiplier']) {
-    cantidadMultiplicadoresJ += 1
+    cantidadMultiplicadoresJ += 1;
   }
   if (estadoJuego['cpuMultiplier']) {
-    cantidadMultiplicadoresM += 1
+    cantidadMultiplicadoresM += 1;
   }
 
   for (var i =  estadoJuego['numerosRestantes'].length - 1; i >= 0; i--) {
     if (cantidadMultiplicadoresJ < 1) {
-      cantidadRestanteJ += estadoJuego['numerosRestantes'][i]
+      cantidadRestanteJ += estadoJuego['numerosRestantes'][i];
     } else {
-      cantidadRestanteJ +=  estadoJuego['numerosRestantes'][i]*2
-      cantidadMultiplicadoresJ -= 1
+      cantidadRestanteJ +=  estadoJuego['numerosRestantes'][i]*2;
+      cantidadMultiplicadoresJ -= 1;
     }
     if (cantidadMultiplicadoresM < 1) {
-      cantidadRestanteC +=  estadoJuego['numerosRestantes'][i]
+      cantidadRestanteC +=  estadoJuego['numerosRestantes'][i];
     } else {
-      cantidadRestanteC +=  estadoJuego['numerosRestantes'][i]*2
-      cantidadMultiplicadoresM -= 1
+      cantidadRestanteC +=  estadoJuego['numerosRestantes'][i]*2;
+      cantidadMultiplicadoresM -= 1;
     }
   }
   return {

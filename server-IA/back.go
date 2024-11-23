@@ -136,14 +136,11 @@ func revisarContenido(unContenido int, estadoJuego *EstadoJuego) (NuevoEstado Es
         }
 
         var scoreKey string
-        //var multiplierKey string
 
         if nuevoEstado.TurnoJugador {
             scoreKey = "PlayerScore"
-            //multiplierKey = "PlayerMultiplier"
         } else {
             scoreKey = "CpuScore"
-            //multiplierKey = "CpuMultiplier"
         }
 
         // Actualizar el puntaje del jugador o CPU
